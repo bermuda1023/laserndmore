@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { WhatsAppWidget } from "@/components/WhatsAppWidget";
 import { type Locale, isLocale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/getDictionary";
 
@@ -20,10 +21,11 @@ export default async function LocaleLayout({
   return (
     <>
       <Header locale={locale} dict={dict} />
-      <main className="mx-auto w-full max-w-7xl px-5 py-10 lg:px-8">
+      <main className="mx-auto w-full max-w-7xl px-5 pb-10 pt-2 lg:px-8">
         {children}
       </main>
       <Footer dict={dict} locale={locale} />
+      <WhatsAppWidget locale={locale} />
     </>
   );
 }

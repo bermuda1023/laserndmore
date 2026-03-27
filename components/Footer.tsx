@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { businessInfo } from "@/content/business";
 import { Dictionary } from "@/lib/i18n/getDictionary";
 import { Locale } from "@/lib/i18n/config";
@@ -13,10 +14,13 @@ export function Footer({ dict, locale }: FooterProps) {
     <footer className="mt-24 border-t border-warm-200 bg-white">
       <div className="mx-auto grid w-full max-w-7xl gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
         <div className="sm:col-span-2 lg:col-span-1">
-          <div className="flex items-center gap-1.5">
-            <span className="font-display text-xl font-bold text-ink">Laser</span>
-            <span className="font-display text-xl font-light italic text-rose">&amp; More</span>
-          </div>
+          <Image
+            src="/images/logo.png"
+            alt="Laser & More"
+            width={150}
+            height={42}
+            className="h-9 w-auto mix-blend-multiply"
+          />
           <p className="mt-3 text-sm leading-relaxed text-ink/50">
             {dict.tagline}
           </p>

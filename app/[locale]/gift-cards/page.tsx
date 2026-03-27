@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { StructuredData } from "@/components/seo/StructuredData";
 import { businessInfo } from "@/content/business";
-import { isLocale } from "@/lib/i18n/config";
+import { Locale, isLocale } from "@/lib/i18n/config";
 import { buildLocalizedMetadata } from "@/lib/seo/metadata";
+import { createBreadcrumbSchema } from "@/lib/seo/schema";
 
 export async function generateMetadata({
   params
@@ -18,13 +20,13 @@ export async function generateMetadata({
     title:
       localeParam === "ru"
         ? "Подарочные карты — Laser & More, Sunny Isles Beach"
-        : "Gift Cards — Laser & More Med Spa, Sunny Isles Beach",
+        : "Gift Cards — Laser & More, Sunny Isles Beach",
     description:
       localeParam === "ru"
         ? "Подарите процедуры Laser & More — подарочные карты на лазерную эпиляцию, уходы за лицом и мед-эстетику в Sunny Isles Beach, Miami."
-        : "Give the gift of self-care with Laser & More gift cards for laser hair removal, facials, and med spa treatments in Sunny Isles Beach, Miami.",
+        : "Give the gift of self-care with Laser & More gift cards for laser hair removal, facials, and aesthetic treatments in Sunny Isles Beach, Miami.",
     keywords: [
-      "gift card med spa Miami",
+      "gift card aesthetic studio Miami",
       "facial gift card Sunny Isles",
       "Laser & More gift cards"
     ]
@@ -37,10 +39,32 @@ export default async function GiftCardsPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale: localeParam } = await params;
-  const locale = isLocale(localeParam) ? localeParam : "en";
+  const locale: Locale = isLocale(localeParam) ? localeParam : "en";
+  const breadcrumbs = [
+    { name: locale === "ru" ? "Главная" : "Home", url: `/${locale}` },
+    {
+      name: locale === "ru" ? "Подарочные карты" : "Gift Cards",
+      url: `/${locale}/gift-cards`
+    }
+  ];
 
   return (
     <section className="mx-auto max-w-2xl text-center">
+      <StructuredData data={createBreadcrumbSchema(breadcrumbs)} />
+      <nav className="mb-3 flex items-center justify-center gap-2 text-xs text-ink/40">
+        {breadcrumbs.map((crumb, i) => (
+          <span key={crumb.url} className="flex items-center gap-2">
+            {i > 0 && <span>/</span>}
+            {i < breadcrumbs.length - 1 ? (
+              <Link href={crumb.url} className="transition-colors hover:text-ink">
+                {crumb.name}
+              </Link>
+            ) : (
+              <span className="text-ink/60">{crumb.name}</span>
+            )}
+          </span>
+        ))}
+      </nav>
       <div className="rounded-4xl border border-warm-200 bg-white p-10 shadow-soft sm:p-14">
         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-rose/10">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-rose" strokeLinecap="round" strokeLinejoin="round">

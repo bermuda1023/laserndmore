@@ -1,17 +1,18 @@
 const ru = {
   siteName: "Laser & More",
-  tagline: "Лазерная эпиляция, уходы за лицом и med spa в Sunny Isles Beach, Miami",
+  tagline: "Лазерная эпиляция, уходы за лицом и эстетические процедуры в Sunny Isles Beach, Miami",
   nav: {
     home: "Главная",
     services: "Услуги",
     about: "О нас",
     giftCards: "Подарочные карты",
     contact: "Контакты",
+    blog: "Блог",
     bookNow: "Записаться"
   },
   hero: {
     badge: "Sunny Isles Beach, Miami",
-    title: "Лазер, уходы и Med Spa в Sunny Isles Beach",
+    title: "Лазер, уходы и эстетические процедуры в Sunny Isles Beach",
     description:
       "Laser & More — персонализированная лазерная эпиляция, Hydrafacial, микронидлинг и передовые процедуры для кожи в Sunny Isles Beach, Miami. Прием на английском и русском.",
     primaryCta: "Запись в GlossGenius",

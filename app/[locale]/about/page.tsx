@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { StructuredData } from "@/components/seo/StructuredData";
 import { businessInfo } from "@/content/business";
 import { isLocale, Locale } from "@/lib/i18n/config";
 import { buildLocalizedMetadata } from "@/lib/seo/metadata";
+import {
+  createBreadcrumbSchema,
+  createLocalBusinessSchema,
+  createPersonSchema
+} from "@/lib/seo/schema";
 import { notFound } from "next/navigation";
+import { PhotoCarousel } from "@/components/PhotoCarousel";
 
 export async function generateMetadata({
   params
@@ -18,16 +25,16 @@ export async function generateMetadata({
     path: "/about",
     title:
       localeParam === "ru"
-        ? "Об Анжелике — Med Spa Sunny Isles Beach"
-        : "About Anzhelika — Med Spa Sunny Isles Beach, Miami",
+        ? "Об Анжелике — эстетические процедуры в Sunny Isles Beach"
+        : "About Anzhelika — Aesthetic Studio in Sunny Isles Beach, Miami",
     description:
       localeParam === "ru"
         ? "Анжелика — основатель Laser & More, мед-эстетического центра в Sunny Isles Beach, Miami. Персонализированный подход к лазерным процедурам и уходам за лицом."
-        : "Meet Anzhelika, founder of Laser & More med spa in Sunny Isles Beach, Miami. Personalized laser and facial treatments with bilingual care in English and Russian.",
+        : "Meet Anzhelika, founder of Laser & More in Sunny Isles Beach, Miami. Personalized laser and facial treatments with bilingual care in English and Russian.",
     keywords: [
-      "Anzhelika med spa",
+      "Anzhelika aesthetic studio",
       "Laser & More owner",
-      "med spa Sunny Isles Beach",
+      "aesthetic studio Sunny Isles Beach",
       "esthetician Sunny Isles"
     ]
   });
@@ -41,9 +48,31 @@ export default async function AboutPage({
   const { locale: localeParam } = await params;
   if (!isLocale(localeParam)) notFound();
   const locale: Locale = localeParam;
+  const breadcrumbs = [
+    { name: locale === "ru" ? "Главная" : "Home", url: `/${locale}` },
+    { name: locale === "ru" ? "О нас" : "About", url: `/${locale}/about` }
+  ];
 
   return (
-    <div className="space-y-12">
+    <div>
+      <StructuredData data={createLocalBusinessSchema()} />
+      <StructuredData data={createPersonSchema()} />
+      <StructuredData data={createBreadcrumbSchema(breadcrumbs)} />
+      <nav className="mb-3 flex items-center gap-2 text-xs text-ink/40">
+        {breadcrumbs.map((crumb, i) => (
+          <span key={crumb.url} className="flex items-center gap-2">
+            {i > 0 && <span>/</span>}
+            {i < breadcrumbs.length - 1 ? (
+              <Link href={crumb.url} className="transition-colors hover:text-ink">
+                {crumb.name}
+              </Link>
+            ) : (
+              <span className="text-ink/60">{crumb.name}</span>
+            )}
+          </span>
+        ))}
+      </nav>
+      <div className="space-y-12">
       <section className="grid gap-8 lg:grid-cols-[1.2fr,1fr]">
         <article className="rounded-4xl border border-warm-200 bg-white p-8 shadow-soft sm:p-10">
           <p className="text-xs font-bold uppercase tracking-widest text-rose">
@@ -60,7 +89,7 @@ export default async function AboutPage({
             <p>
               {locale === "ru"
                 ? "Анжелика — основатель Laser & More в Sunny Isles Beach, Miami. С вниманием к каждому клиенту она подбирает наиболее эффективные и комфортные процедуры для лица и тела."
-                : "Anzhelika is the founder of Laser & More, a med spa located in Sunny Isles Beach, Miami. She combines technical expertise with genuine personal attention to deliver effective, comfortable treatments for face and body."}
+                : "Anzhelika is the founder of Laser & More, an aesthetic studio located in Sunny Isles Beach, Miami. She combines technical expertise with genuine personal attention to deliver effective, comfortable treatments for face and body."}
             </p>
             <p>
               {locale === "ru"
@@ -84,35 +113,22 @@ export default async function AboutPage({
           </Link>
         </article>
 
-        <div className="flex flex-col gap-4">
-          <div className="flex flex-1 items-center justify-center rounded-4xl border border-warm-200 bg-gradient-to-br from-warm-50 to-blush p-10 text-center">
-            <div>
-              <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-rose/10">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-rose">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <circle cx="12" cy="7" r="4" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <p className="mt-4 text-sm font-medium text-ink/40">
-                {locale === "ru" ? "Фото владельца скоро" : "Owner photo coming soon"}
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-1 items-center justify-center rounded-4xl border border-warm-200 bg-gradient-to-br from-warm-50 to-warm-100 p-10 text-center">
-            <div>
-              <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-gold/10">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-gold">
-                  <rect x="3" y="3" width="18" height="18" rx="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <circle cx="8.5" cy="8.5" r="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M21 15l-5-5L5 21" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-              <p className="mt-4 text-sm font-medium text-ink/40">
-                {locale === "ru" ? "Фото интерьера скоро" : "Spa interior photo coming soon"}
-              </p>
-            </div>
-          </div>
-        </div>
+        <PhotoCarousel
+          photos={[
+            {
+              src: "/images/owner-treatment.png",
+              alt: locale === "ru" ? "Анжелика — основатель Laser & More" : "Anzhelika — Founder of Laser & More"
+            },
+            {
+              src: "/images/owner-portrait.png",
+              alt: locale === "ru" ? "Анжелика — профессиональный портрет" : "Anzhelika — Professional Portrait"
+            },
+            {
+              src: "/images/owner-closeup.png",
+              alt: locale === "ru" ? "Анжелика — портрет крупным планом" : "Anzhelika — Portrait"
+            }
+          ]}
+        />
       </section>
 
       <section className="grid gap-4 sm:grid-cols-3">
@@ -136,6 +152,7 @@ export default async function AboutPage({
           </div>
         ))}
       </section>
+      </div>
     </div>
   );
 }

@@ -78,7 +78,7 @@ export default async function ServiceDetailPage({
   ];
 
   return (
-    <div className="mx-auto max-w-3xl space-y-8">
+    <div className="mx-auto max-w-3xl">
       <StructuredData data={createLocalBusinessSchema()} />
       <StructuredData data={createServiceSchema(service)} />
       <StructuredData data={createBreadcrumbSchema(breadcrumbs)} />
@@ -87,7 +87,7 @@ export default async function ServiceDetailPage({
       )}
 
       {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 text-xs text-ink/40">
+      <nav className="mb-3 flex items-center gap-2 text-xs text-ink/40">
         {breadcrumbs.map((crumb, i) => (
           <span key={crumb.url} className="flex items-center gap-2">
             {i > 0 && <span>/</span>}
@@ -101,7 +101,7 @@ export default async function ServiceDetailPage({
           </span>
         ))}
       </nav>
-
+      <div className="space-y-8">
       {/* Main card */}
       <article className="rounded-4xl border border-warm-200 bg-white p-8 shadow-soft sm:p-10">
         <div className="flex flex-wrap items-center gap-3">
@@ -165,6 +165,7 @@ export default async function ServiceDetailPage({
           </div>
         </section>
       )}
+      </div>
     </div>
   );
 }

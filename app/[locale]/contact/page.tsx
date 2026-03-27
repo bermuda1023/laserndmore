@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { StructuredData } from "@/components/seo/StructuredData";
 import { businessInfo } from "@/content/business";
 import { isLocale, Locale } from "@/lib/i18n/config";
 import { buildLocalizedMetadata } from "@/lib/seo/metadata";
+import { createBreadcrumbSchema, createLocalBusinessSchema } from "@/lib/seo/schema";
 import { notFound } from "next/navigation";
 
 export async function generateMetadata({
@@ -22,11 +24,11 @@ export async function generateMetadata({
         : "Contact Laser & More — Sunny Isles Beach, Miami",
     description:
       localeParam === "ru"
-        ? "Адрес, часы работы и онлайн-запись Laser & More med spa. 17086 Collins Ave, Sunny Isles Beach, FL 33160. Обслуживаем Miami, Aventura и North Miami Beach."
-        : "Find Laser & More med spa at 17086 Collins Ave, Sunny Isles Beach, FL 33160. Business hours, online booking, and directions. Serving Miami, Aventura, and North Miami Beach.",
+        ? "Адрес, часы работы и онлайн-запись Laser & More. 17086 Collins Ave, Sunny Isles Beach, FL 33160. Обслуживаем Miami, Aventura и North Miami Beach."
+        : "Find Laser & More at 17086 Collins Ave, Sunny Isles Beach, FL 33160. Business hours, online booking, and directions. Serving Miami, Aventura, and North Miami Beach.",
     keywords: [
       "Laser & More contact",
-      "med spa Sunny Isles Beach address",
+      "aesthetic studio Sunny Isles Beach address",
       "laser hair removal near me Miami",
       "17086 Collins Ave Sunny Isles"
     ]
@@ -41,9 +43,30 @@ export default async function ContactPage({
   const { locale: localeParam } = await params;
   if (!isLocale(localeParam)) notFound();
   const locale: Locale = localeParam;
+  const breadcrumbs = [
+    { name: locale === "ru" ? "Главная" : "Home", url: `/${locale}` },
+    { name: locale === "ru" ? "Контакты" : "Contact", url: `/${locale}/contact` }
+  ];
 
   return (
-    <div className="space-y-8">
+    <div>
+      <StructuredData data={createLocalBusinessSchema()} />
+      <StructuredData data={createBreadcrumbSchema(breadcrumbs)} />
+      <nav className="mb-3 flex items-center gap-2 text-xs text-ink/40">
+        {breadcrumbs.map((crumb, i) => (
+          <span key={crumb.url} className="flex items-center gap-2">
+            {i > 0 && <span>/</span>}
+            {i < breadcrumbs.length - 1 ? (
+              <Link href={crumb.url} className="transition-colors hover:text-ink">
+                {crumb.name}
+              </Link>
+            ) : (
+              <span className="text-ink/60">{crumb.name}</span>
+            )}
+          </span>
+        ))}
+      </nav>
+      <div className="space-y-8">
       <section>
         <h1 className="font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl">
           {locale === "ru"
@@ -159,6 +182,7 @@ export default async function ContactPage({
             </p>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

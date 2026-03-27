@@ -1,5 +1,7 @@
 import { businessInfo } from "@/content/business";
 import { ServiceItem } from "@/content/services.types";
+import { BlogPost } from "@/content/blog.types";
+import { Locale } from "@/lib/i18n/config";
 
 const dayMap: Record<string, string> = {
   Monday: "Monday",
@@ -21,7 +23,7 @@ export function createLocalBusinessSchema() {
     telephone: businessInfo.phone,
     email: businessInfo.email,
     description:
-      "Laser & More is a med spa in Sunny Isles Beach, Miami offering laser hair removal, facials, microneedling, chemical peels, RF skin tightening, and body contouring.",
+      "Laser & More is an aesthetic studio in Sunny Isles Beach, Miami offering laser hair removal, facials, microneedling, chemical peels, RF skin tightening, and body contouring.",
     priceRange: "$$",
     address: {
       "@type": "PostalAddress",
@@ -46,6 +48,12 @@ export function createLocalBusinessSchema() {
     ],
     sameAs: [businessInfo.instagramUrl, businessInfo.tiktokUrl, businessInfo.googleUrl],
     hasMap: businessInfo.googleUrl,
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "5.0",
+      reviewCount: "97",
+      bestRating: "5"
+    },
     availableLanguage: businessInfo.languages,
     makesOffer: {
       "@type": "Offer",
@@ -124,5 +132,43 @@ export function createFaqSchema(
         text: faq.a
       }
     }))
+  };
+}
+
+export function createBlogPostingSchema(post: BlogPost, locale: Locale) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.publishedAt,
+    author: {
+      "@type": "Person",
+      name: businessInfo.owner
+    },
+    publisher: {
+      "@type": "Organization",
+      name: businessInfo.name,
+      url: businessInfo.domain
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${businessInfo.domain}/${locale}/blog/${post.slug}`
+    }
+  };
+}
+
+export function createPersonSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: businessInfo.owner,
+    jobTitle: "Founder & Esthetician",
+    worksFor: {
+      "@type": "BeautySalon",
+      name: businessInfo.name,
+      url: businessInfo.domain
+    },
+    url: `${businessInfo.domain}/en/about`
   };
 }

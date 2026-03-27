@@ -3,8 +3,10 @@ import { businessInfo } from "@/content/business";
 import { locales } from "@/lib/i18n/config";
 import { servicesEn } from "@/content/services.en";
 import { servicesRu } from "@/content/services.ru";
+import { blogPostsEn } from "@/content/blog.en";
+import { blogPostsRu } from "@/content/blog.ru";
 
-const basePaths = ["", "/services", "/about", "/gift-cards", "/contact"];
+const basePaths = ["", "/services", "/about", "/blog", "/gift-cards", "/contact"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -14,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${businessInfo.domain}/${locale}${path}`,
       lastModified: now,
       changeFrequency: "weekly" as const,
-      priority: path === "" ? 1 : 0.8
+      priority: path === "" ? 1 : path === "/blog" ? 0.9 : 0.8
     }))
   );
 
@@ -33,5 +35,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   ];
 
-  return [...staticUrls, ...serviceUrls];
+  const blogUrls = [
+    ...blogPostsEn.map((post) => ({
+      url: `${businessInfo.domain}/en/blog/${post.slug}`,
+      lastModified: new Date(post.publishedAt),
+      changeFrequency: "monthly" as const,
+      priority: 0.6
+    })),
+    ...blogPostsRu.map((post) => ({
+      url: `${businessInfo.domain}/ru/blog/${post.slug}`,
+      lastModified: new Date(post.publishedAt),
+      changeFrequency: "monthly" as const,
+      priority: 0.6
+    }))
+  ];
+
+  return [...staticUrls, ...serviceUrls, ...blogUrls];
 }

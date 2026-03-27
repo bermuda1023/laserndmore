@@ -5,7 +5,7 @@ import { getServices } from "@/content/services";
 import { businessInfo } from "@/content/business";
 import { isLocale, Locale } from "@/lib/i18n/config";
 import { buildLocalizedMetadata } from "@/lib/seo/metadata";
-import { createLocalBusinessSchema } from "@/lib/seo/schema";
+import { createBreadcrumbSchema, createLocalBusinessSchema } from "@/lib/seo/schema";
 import { notFound } from "next/navigation";
 
 const categoryLabelsEn: Record<string, string> = {
@@ -46,7 +46,7 @@ export async function generateMetadata({
     title:
       localeParam === "ru"
         ? "Услуги — лазер, уходы, мед-эстетика в Sunny Isles Beach"
-        : "Laser, Facial & Med Spa Services in Sunny Isles Beach, Miami",
+        : "Laser, Facial & Aesthetic Services in Sunny Isles Beach, Miami",
     description:
       localeParam === "ru"
         ? "Все услуги Laser & More в Sunny Isles Beach: лазерная эпиляция, Hydrafacial, микронидлинг, пилинги, RF-лифтинг, VelaShape и другие процедуры."
@@ -54,7 +54,7 @@ export async function generateMetadata({
     keywords: [
       "laser hair removal Sunny Isles Beach",
       "facial services Miami",
-      "med spa services Sunny Isles",
+      "aesthetic services Sunny Isles",
       "Hydrafacial near me Miami",
       "microneedling Sunny Isles Beach"
     ]
@@ -81,16 +81,35 @@ export default async function ServicesPage({
       items: services.filter((s) => s.category === cat)
     }))
     .filter((g) => g.items.length > 0);
+  const breadcrumbs = [
+    { name: locale === "ru" ? "Главная" : "Home", url: `/${locale}` },
+    { name: locale === "ru" ? "Услуги" : "Services", url: `/${locale}/services` }
+  ];
 
   return (
-    <div className="space-y-14">
+    <div>
       <StructuredData data={createLocalBusinessSchema()} />
-
+      <StructuredData data={createBreadcrumbSchema(breadcrumbs)} />
+      <nav className="mb-3 flex items-center gap-2 text-xs text-ink/40">
+        {breadcrumbs.map((crumb, i) => (
+          <span key={crumb.url} className="flex items-center gap-2">
+            {i > 0 && <span>/</span>}
+            {i < breadcrumbs.length - 1 ? (
+              <Link href={crumb.url} className="transition-colors hover:text-ink">
+                {crumb.name}
+              </Link>
+            ) : (
+              <span className="text-ink/60">{crumb.name}</span>
+            )}
+          </span>
+        ))}
+      </nav>
+      <div className="space-y-14">
       <section>
         <h1 className="font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl">
           {locale === "ru"
-            ? "Med Spa услуги в Sunny Isles Beach"
-            : "Med Spa Services in Sunny Isles Beach"}
+            ? "Эстетические услуги в Sunny Isles Beach"
+            : "Aesthetic Services in Sunny Isles Beach"}
         </h1>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-ink/60">
           {locale === "ru"
@@ -167,6 +186,7 @@ export default async function ServicesPage({
           {locale === "ru" ? "Записаться" : "Book Now"} &rarr;
         </Link>
       </section>
+      </div>
     </div>
   );
 }

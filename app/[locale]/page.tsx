@@ -14,7 +14,7 @@ import { notFound } from "next/navigation";
 
 const homeFaqsEn = [
   { q: "Where is Laser & More located?", a: "Laser & More is located at 17086 Collins Ave, Sunny Isles Beach, FL 33160 — serving Sunny Isles, Miami, Aventura, North Miami Beach, Bal Harbour, and Hallandale Beach." },
-  { q: "What med spa services do you offer in Sunny Isles Beach?", a: "We offer laser hair removal, Hydrafacial, microneedling, chemical peels, RF skin tightening, DMK enzyme therapy, body contouring with Endosphere and VelaShape, and many more facials and skin treatments." },
+  { q: "What services do you offer in Sunny Isles Beach?", a: "We offer laser hair removal, Hydrafacial, microneedling, chemical peels, RF skin tightening, DMK enzyme therapy, body contouring with Endosphere and VelaShape, and many more facials and skin treatments." },
   { q: "Do you offer laser hair removal in Miami?", a: "Yes — Laser & More provides laser hair removal for all body zones at our Sunny Isles Beach location, conveniently located in the greater Miami area." },
   { q: "What languages are spoken at Laser & More?", a: "Consultations and treatments are available in both English and Russian." },
   { q: "How do I book an appointment?", a: "You can book directly online through our GlossGenius booking page, available 24/7 for instant scheduling." },
@@ -42,18 +42,18 @@ export async function generateMetadata({
     locale: localeParam,
     title:
       localeParam === "ru"
-        ? "Med Spa в Sunny Isles Beach, Miami"
-        : "Med Spa in Sunny Isles Beach, Miami",
+        ? "Эстетические процедуры в Sunny Isles Beach, Miami"
+        : "Aesthetic Studio in Sunny Isles Beach, Miami",
     description:
       localeParam === "ru"
         ? "Laser & More — мед-эстетический центр в Sunny Isles Beach, Miami. Лазерная эпиляция, Hydrafacial, микронидлинг, пилинги, RF-лифтинг и уходы за лицом. Прием на английском и русском."
-        : "Laser & More is a med spa in Sunny Isles Beach, Miami offering laser hair removal, Hydrafacial, microneedling, chemical peels, RF skin tightening, and personalized facials. English and Russian.",
+        : "Laser & More is an aesthetic studio in Sunny Isles Beach, Miami offering laser hair removal, Hydrafacial, microneedling, chemical peels, RF skin tightening, and personalized facials. English and Russian.",
     keywords: [
-      "med spa Sunny Isles Beach",
+      "aesthetic studio Sunny Isles Beach",
       "laser hair removal Miami",
       "facials Sunny Isles Beach",
       "Hydrafacial Miami",
-      "med spa near me Miami"
+      "aesthetic studio near me Miami"
     ]
   });
 }
@@ -72,9 +72,10 @@ export default async function LocaleHomePage({
   const faqs = locale === "ru" ? homeFaqsRu : homeFaqsEn;
 
   return (
-    <div className="space-y-16">
+    <div>
       <StructuredData data={createLocalBusinessSchema()} />
       <StructuredData data={createFaqSchema(faqs)} />
+      <div className="space-y-16">
       <Hero dict={dict} locale={locale} />
 
       <ServiceGrid
@@ -87,8 +88,8 @@ export default async function LocaleHomePage({
         }
         subheading={
           locale === "ru"
-            ? "Индивидуальный подход к каждой процедуре в нашем med spa"
-            : "Every treatment is personalized to your skin and goals at our Sunny Isles med spa"
+            ? "Индивидуальный подход к каждой процедуре в нашей студии"
+            : "Every treatment is personalized to your skin and goals at our Sunny Isles studio"
         }
       />
 
@@ -156,6 +157,7 @@ export default async function LocaleHomePage({
           </div>
         </div>
       </section>
+      </div>
     </div>
   );
 }

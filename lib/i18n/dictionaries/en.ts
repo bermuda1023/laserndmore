@@ -1,17 +1,18 @@
 const en = {
   siteName: "Laser & More",
-  tagline: "Laser hair removal, facials, and med spa treatments in Sunny Isles Beach, Miami",
+  tagline: "Laser hair removal, facials, and aesthetic treatments in Sunny Isles Beach, Miami",
   nav: {
     home: "Home",
     services: "Services",
     about: "About",
     giftCards: "Gift Cards",
     contact: "Contact",
+    blog: "Blog",
     bookNow: "Book Now"
   },
   hero: {
     badge: "Sunny Isles Beach, Miami",
-    title: "Laser, Facials & Med Spa in Sunny Isles Beach",
+    title: "Laser, Facials & Aesthetic Treatments in Sunny Isles Beach",
     description:
       "Laser & More offers personalized laser hair removal, Hydrafacial, microneedling, and advanced skin treatments in Sunny Isles Beach, Miami. Bilingual care in English and Russian.",
     primaryCta: "Book on GlossGenius",

@@ -7,6 +7,11 @@ function hasLocale(pathname: string) {
   );
 }
 
+function extractLocale(pathname: string) {
+  const segment = pathname.split("/")[1];
+  return locales.find((locale) => locale === segment);
+}
+
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -19,12 +24,25 @@ export function proxy(request: NextRequest) {
   }
 
   if (hasLocale(pathname)) {
-    return NextResponse.next();
+    const locale = extractLocale(pathname);
+    const response = NextResponse.next();
+    if (locale) {
+      response.cookies.set("NEXT_LOCALE", locale, {
+        path: "/",
+        sameSite: "lax"
+      });
+    }
+    return response;
   }
 
   const url = request.nextUrl.clone();
   url.pathname = `/${defaultLocale}${pathname}`;
-  return NextResponse.redirect(url);
+  const response = NextResponse.redirect(url);
+  response.cookies.set("NEXT_LOCALE", defaultLocale, {
+    path: "/",
+    sameSite: "lax"
+  });
+  return response;
 }
 
 export const config = {
