@@ -34,3 +34,11 @@ export const businessInfo = {
     "20% cancellation fee for no-shows or cancellations made within 24 hours of the appointment.",
   languages: ["English", "Russian"]
 } as const;
+
+/** Convert "HH:MM" (24h) to "h:MM AM/PM" for display. */
+export function formatTime(time: string): string {
+  const [h, m] = time.split(":").map(Number);
+  const period = h >= 12 ? "PM" : "AM";
+  const hour12 = h % 12 || 12;
+  return m === 0 ? `${hour12} ${period}` : `${hour12}:${m.toString().padStart(2, "0")} ${period}`;
+}

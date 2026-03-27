@@ -4,7 +4,7 @@ import { ServiceGrid } from "@/components/sections/ServiceGrid";
 import { TrustSignals } from "@/components/sections/TrustSignals";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { getServices } from "@/content/services";
-import { businessInfo } from "@/content/business";
+import { businessInfo, formatTime } from "@/content/business";
 import { isLocale, Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/getDictionary";
 import { buildLocalizedMetadata } from "@/lib/seo/metadata";
@@ -100,7 +100,7 @@ export default async function LocaleHomePage({
         {businessInfo.hours.filter(h => h.open).map((entry) => (
           <div key={entry.day} className="rounded-xl border border-warm-200 bg-white px-5 py-4">
             <p className="text-xs font-bold uppercase tracking-widest text-ink/30">{entry.day}</p>
-            <p className="mt-1 text-sm font-semibold text-ink">{entry.open} &ndash; {entry.close}</p>
+            <p className="mt-1 text-sm font-semibold text-ink">{formatTime(entry.open!)} &ndash; {formatTime(entry.close!)}</p>
           </div>
         ))}
         <div className="rounded-xl border border-warm-200 bg-white px-5 py-4">

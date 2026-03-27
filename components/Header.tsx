@@ -30,7 +30,7 @@ export function Header({ locale, dict }: HeaderProps) {
             alt="Laser & More"
             width={200}
             height={55}
-            className="-my-2 h-16 w-auto mix-blend-multiply lg:h-18"
+            className="-my-2 h-12 w-auto mix-blend-multiply lg:h-14"
             priority
           />
         </Link>

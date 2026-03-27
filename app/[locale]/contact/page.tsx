@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { StructuredData } from "@/components/seo/StructuredData";
-import { businessInfo } from "@/content/business";
+import { businessInfo, formatTime } from "@/content/business";
 import { isLocale, Locale } from "@/lib/i18n/config";
 import { buildLocalizedMetadata } from "@/lib/seo/metadata";
 import { createBreadcrumbSchema, createLocalBusinessSchema } from "@/lib/seo/schema";
@@ -166,7 +166,7 @@ export default async function ContactPage({
                 <div key={entry.day} className="flex justify-between text-sm">
                   <span className="font-medium text-ink/70">{entry.day}</span>
                   <span className={entry.open ? "font-semibold text-ink" : "text-ink/35"}>
-                    {entry.open && entry.close ? `${entry.open} - ${entry.close}` : (locale === "ru" ? "Закрыто" : "Closed")}
+                    {entry.open && entry.close ? `${formatTime(entry.open)} – ${formatTime(entry.close)}` : (locale === "ru" ? "Закрыто" : "Closed")}
                   </span>
                 </div>
               ))}
