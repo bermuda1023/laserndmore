@@ -118,11 +118,34 @@ export default async function ServiceDetailPage({
           </span>
         </h1>
 
-        <p className="mt-5 text-lg font-bold text-ink">{service.priceFrom}</p>
+        <p className="mt-5 text-lg font-bold text-ink">
+          {locale === "ru" ? "от " : "From "}{service.priceFrom}
+        </p>
 
         <p className="mt-5 text-base leading-relaxed text-ink/65">
           {service.longDescription}
         </p>
+
+        {service.packages && service.packages.length > 0 && (
+          <div className="mt-6 rounded-2xl border border-warm-200 bg-warm-50/50 p-5">
+            <p className="mb-3 text-xs font-bold uppercase tracking-widest text-ink/40">
+              {locale === "ru" ? "Варианты и цены" : "Options & Pricing"}
+            </p>
+            <div className="divide-y divide-warm-200">
+              {service.packages.map((pkg) => (
+                <div key={pkg.name} className="flex items-center justify-between py-2.5 first:pt-0 last:pb-0">
+                  <div>
+                    <span className="text-sm font-medium text-ink">{pkg.name}</span>
+                    {pkg.duration && (
+                      <span className="ml-2 text-xs text-ink/40">{pkg.duration}</span>
+                    )}
+                  </div>
+                  <span className="text-sm font-bold text-ink">{pkg.price}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <p className="mt-4 text-sm text-ink/50">
           {locale === "ru"

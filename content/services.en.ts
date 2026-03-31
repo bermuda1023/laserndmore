@@ -3,13 +3,142 @@ import { ServiceItem } from "@/content/services.types";
 export const servicesEn: ServiceItem[] = [
   // --- LASER ---
   {
-    slug: "laser-hair-removal",
-    name: "Laser Hair Removal",
-    shortDescription: "Fast, effective hair reduction for face and body with personalized protocols.",
+    slug: "laser-xsmall-area",
+    name: "Laser Hair Removal — XSmall Area",
+    shortDescription: "Upper lip, ears, chin, sideburns, toes, fingers, areolas, or happy trail.",
     longDescription:
-      "Laser & More offers laser hair removal for every zone — from upper lip and chin to full body. Each session is customized to your skin type and hair growth pattern for safe, comfortable results. Available areas include upper lip, chin, full face, sideburns, ears, toes, back neck, beard shaping, bikini lines, front bikini, full Brazilian, inner and full buttocks, chest, half and full arms, half and full legs, half and full back, stomach, armpits, and belly line.",
-    duration: "5-60 min",
+      "Quick, targeted laser hair removal for the smallest zones. Each session is customized to your skin type and hair growth pattern for safe, comfortable results at Laser & More in Sunny Isles Beach.",
+    duration: "5-10 min",
     priceFrom: "$20",
+    category: "laser",
+    packages: [
+      { name: "Upper Lip", price: "$20" },
+      { name: "Chin", price: "$20" },
+      { name: "Sideburns", price: "$20" },
+      { name: "Ears", price: "$20" },
+      { name: "Toes", price: "$20" },
+      { name: "Fingers", price: "$20" },
+      { name: "Areolas", price: "$20" },
+      { name: "Happy Trail", price: "$30" }
+    ],
+    faqs: [
+      { q: "How many sessions are usually needed?", a: "Most clients see best results after 6-8 sessions, spaced according to hair growth cycles." },
+      { q: "Is there downtime?", a: "Minimal — mild redness may occur and typically fades within a few hours." },
+      { q: "Does it work on all skin tones?", a: "Modern laser technology accommodates a range of skin tones. A quick consultation confirms the best approach for you." }
+    ]
+  },
+  {
+    slug: "laser-small-area",
+    name: "Laser Hair Removal — Small Area",
+    shortDescription: "Underarms, feet, hands, or bikini line.",
+    longDescription:
+      "Effective laser hair removal for small areas. Every session is tailored to your skin type and hair growth pattern for safe, lasting results at Laser & More in Sunny Isles Beach.",
+    duration: "10-15 min",
+    priceFrom: "$40",
+    category: "laser",
+    packages: [
+      { name: "Underarms", price: "$40" },
+      { name: "Feet", price: "$40" },
+      { name: "Hands", price: "$40" },
+      { name: "Bikini Line", price: "$40" },
+      { name: "Inner Buttocks", price: "$40" },
+      { name: "Back Neck", price: "$40" }
+    ],
+    faqs: [
+      { q: "How many sessions are usually needed?", a: "Most clients see best results after 6-8 sessions, spaced according to hair growth cycles." },
+      { q: "Is there downtime?", a: "Minimal — mild redness may occur and typically fades within a few hours." },
+      { q: "Does it work on all skin tones?", a: "Modern laser technology accommodates a range of skin tones. A quick consultation confirms the best approach for you." }
+    ]
+  },
+  {
+    slug: "laser-medium-area",
+    name: "Laser Hair Removal — Medium Area",
+    shortDescription: "Full face, neck, bikini front, shoulders, or beard shaping.",
+    longDescription:
+      "Laser hair removal for medium-sized areas. Each treatment is personalized to your skin type and hair growth cycle for optimal results at Laser & More in Sunny Isles Beach.",
+    duration: "15-25 min",
+    priceFrom: "$60",
+    category: "laser",
+    packages: [
+      { name: "Full Face", price: "$60" },
+      { name: "Bikini Front", price: "$60" },
+      { name: "Beard Shaping", price: "$60" },
+      { name: "Shoulders", price: "$60" },
+      { name: "Neck", price: "$60" }
+    ],
+    faqs: [
+      { q: "How many sessions are usually needed?", a: "Most clients see best results after 6-8 sessions, spaced according to hair growth cycles." },
+      { q: "Is there downtime?", a: "Minimal — mild redness may occur and typically fades within a few hours." },
+      { q: "Does it work on all skin tones?", a: "Modern laser technology accommodates a range of skin tones. A quick consultation confirms the best approach for you." }
+    ]
+  },
+  {
+    slug: "laser-large-area",
+    name: "Laser Hair Removal — Large Area",
+    shortDescription: "Half arm, half leg, stomach, lower back, upper back, full buttocks, or chest.",
+    longDescription:
+      "Comprehensive laser hair removal for larger body zones. Protocols are customized to your skin type and hair growth pattern for safe, effective results at Laser & More in Sunny Isles Beach.",
+    duration: "25-40 min",
+    priceFrom: "$65",
+    category: "laser",
+    packages: [
+      { name: "Half Arm", price: "$65" },
+      { name: "Chest", price: "$80" },
+      { name: "Stomach", price: "$80" },
+      { name: "Full Buttocks", price: "$80" },
+      { name: "Half Back", price: "$80" },
+      { name: "Half Leg", price: "$90" }
+    ],
+    faqs: [
+      { q: "How many sessions are usually needed?", a: "Most clients see best results after 6-8 sessions, spaced according to hair growth cycles." },
+      { q: "Is there downtime?", a: "Minimal — mild redness may occur and typically fades within a few hours." },
+      { q: "Does it work on all skin tones?", a: "Modern laser technology accommodates a range of skin tones. A quick consultation confirms the best approach for you." }
+    ]
+  },
+  {
+    slug: "laser-xlarge-area",
+    name: "Laser Hair Removal — XLarge Area",
+    shortDescription: "Full arms, full legs, full back, or chest + stomach.",
+    longDescription:
+      "Full-coverage laser hair removal for the largest body zones. Each session is tailored to your skin type for safe, long-lasting results at Laser & More in Sunny Isles Beach.",
+    duration: "40-60 min",
+    priceFrom: "$80",
+    category: "laser",
+    packages: [
+      { name: "Full Arms", price: "$80" },
+      { name: "Chest + Stomach", price: "$120" },
+      { name: "Full Back", price: "$140" },
+      { name: "Full Legs", price: "$140" }
+    ],
+    faqs: [
+      { q: "How many sessions are usually needed?", a: "Most clients see best results after 6-8 sessions, spaced according to hair growth cycles." },
+      { q: "Is there downtime?", a: "Minimal — mild redness may occur and typically fades within a few hours." },
+      { q: "Does it work on all skin tones?", a: "Modern laser technology accommodates a range of skin tones. A quick consultation confirms the best approach for you." }
+    ]
+  },
+  {
+    slug: "laser-full-brazilian",
+    name: "Laser Full Brazilian Bikini",
+    shortDescription: "Complete Brazilian bikini laser hair removal.",
+    longDescription:
+      "Full Brazilian bikini laser hair removal for smooth, long-lasting results. The treatment is customized to your skin type and comfort level, with personalized protocols for safe, effective hair reduction at Laser & More in Sunny Isles Beach.",
+    duration: "20-30 min",
+    priceFrom: "$100",
+    category: "laser",
+    faqs: [
+      { q: "How many sessions are usually needed?", a: "Most clients see best results after 6-8 sessions, spaced according to hair growth cycles." },
+      { q: "Is there downtime?", a: "Minimal — mild redness may occur and typically fades within a few hours." },
+      { q: "Does it work on all skin tones?", a: "Modern laser technology accommodates a range of skin tones. A quick consultation confirms the best approach for you." }
+    ]
+  },
+  {
+    slug: "laser-female-full-body",
+    name: "Laser Female Full Body",
+    shortDescription: "Face, underarms, full Brazilian, full legs, areolas, and belly line.",
+    longDescription:
+      "The ultimate full-body laser hair removal package for women — covering face, underarms, full Brazilian, full legs, areolas, and belly line in one session. Every zone is treated with protocols personalized to your skin type for safe, comfortable results at Laser & More in Sunny Isles Beach.",
+    duration: "60+ min",
+    priceFrom: "$280",
     category: "laser",
     faqs: [
       { q: "How many sessions are usually needed?", a: "Most clients see best results after 6-8 sessions, spaced according to hair growth cycles." },
@@ -130,19 +259,6 @@ export const servicesEn: ServiceItem[] = [
       { q: "Is it only for men?", a: "While designed for male skin, anyone can benefit from this protocol." }
     ]
   },
-  {
-    slug: "valentines-glow-facial",
-    name: "Valentine's Glow Facial",
-    shortDescription: "Special-occasion facial for an instant pre-date radiance boost.",
-    longDescription:
-      "A seasonal special designed to give you a gorgeous glow right before a special occasion. This facial combines targeted exfoliation, hydration, and luminosity-boosting techniques for camera-ready skin.",
-    duration: "50 min",
-    priceFrom: "$99",
-    category: "facial",
-    faqs: [
-      { q: "Is this available year-round?", a: "Check with us — seasonal specials may rotate, but we often have event-prep facials available." }
-    ]
-  },
   // --- SKIN TREATMENTS ---
   {
     slug: "acne-consultation-treatment",
@@ -181,6 +297,11 @@ export const servicesEn: ServiceItem[] = [
     duration: "60 min",
     priceFrom: "$175",
     category: "skin",
+    packages: [
+      { name: "1 Session", price: "$175", duration: "60 min" },
+      { name: "4 Sessions", price: "$350+", duration: "60 min each" },
+      { name: "6 Sessions", price: "$840", duration: "60 min each" }
+    ],
     faqs: [
       { q: "Is there really no downtime?", a: "Correct — most clients return to normal activities immediately." },
       { q: "How many sessions should I plan?", a: "Single sessions give a great boost, but a series of 3-4 treatments maximizes results." }
@@ -278,7 +399,7 @@ export const servicesEn: ServiceItem[] = [
     longDescription:
       "Endosphere therapy uses compressive micro-vibration technology to reduce the appearance of cellulite, improve circulation, and contour the body. Available in 45-minute and 60-minute sessions. A face add-on is also available for lifting and sculpting.",
     duration: "45-60 min",
-    priceFrom: "$99",
+    priceFrom: "$100",
     category: "body",
     faqs: [
       { q: "How many sessions are recommended?", a: "A series of 6-10 sessions typically produces the most visible body-contouring results." },
@@ -351,6 +472,32 @@ export const servicesEn: ServiceItem[] = [
     category: "consultation",
     faqs: [
       { q: "How does the virtual consultation work?", a: "You'll connect via video call to discuss your skin concerns and receive a personalized plan." }
+    ]
+  },
+  {
+    slug: "dermaplane-add-on",
+    name: "Dermaplane Add-On",
+    shortDescription: "Quick dermaplaning add-on to enhance any facial treatment.",
+    longDescription:
+      "Add precision dermaplaning to any facial for smoother texture and better product absorption. Removes dead skin cells and vellus hair in just 10 minutes — the perfect upgrade to your treatment at Laser & More in Sunny Isles Beach.",
+    duration: "10 min",
+    priceFrom: "$30",
+    category: "consultation",
+    faqs: [
+      { q: "Can I add this to any facial?", a: "Yes — dermaplaning pairs well with most facial treatments for enhanced results." }
+    ]
+  },
+  {
+    slug: "endosphere-face-add-on",
+    name: "Endosphere Face Add-On",
+    shortDescription: "Quick facial sculpting and lifting add-on using Endosphere technology.",
+    longDescription:
+      "A 10-minute Endosphere micro-vibration treatment for the face that lifts, sculpts, and improves circulation. Add it to any body Endosphere session or facial for an instant contour boost at Laser & More in Sunny Isles Beach.",
+    duration: "10 min",
+    priceFrom: "$25",
+    category: "consultation",
+    faqs: [
+      { q: "Can I book this standalone?", a: "It works best as an add-on to an Endosphere body session or facial, but can be booked on its own." }
     ]
   }
 ];

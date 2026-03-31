@@ -3,6 +3,12 @@ export type ServiceFaq = {
   a: string;
 };
 
+export type ServicePackage = {
+  name: string;
+  price: string;
+  duration?: string;
+};
+
 export type ServiceItem = {
   slug: string;
   name: string;
@@ -12,4 +18,5 @@ export type ServiceItem = {
   priceFrom: string;
   category: "laser" | "facial" | "skin" | "body" | "consultation";
   faqs: ServiceFaq[];
+  packages?: ServicePackage[];
 };

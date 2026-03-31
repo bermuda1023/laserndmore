@@ -59,6 +59,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     images: ["/images/og-default.jpg"]
   },
+  verification: {
+    google: "xfHufKmLtA6x0UTKGjhg7_bKujXPLKeoaJXs1Vm7J_c"
+  },
   robots: {
     index: true,
     follow: true,
