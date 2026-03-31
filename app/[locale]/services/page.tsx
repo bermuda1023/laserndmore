@@ -135,6 +135,9 @@ export default async function ServicesPage({
                 <div className="flex items-start justify-between gap-3">
                   <h3 className="text-base font-bold text-ink">{service.name}</h3>
                   <span className="whitespace-nowrap text-sm font-bold text-ink">
+                    {service.packages && service.packages.length > 0 && (
+                      <span className="text-xs font-medium text-ink/40">{locale === "ru" ? "от " : "from "}</span>
+                    )}
                     {service.priceFrom}
                   </span>
                 </div>
