@@ -80,7 +80,7 @@ export default async function ServiceDetailPage({
   return (
     <div className="mx-auto max-w-3xl">
       <StructuredData data={createLocalBusinessSchema()} />
-      <StructuredData data={createServiceSchema(service)} />
+      <StructuredData data={createServiceSchema(service, locale)} />
       <StructuredData data={createBreadcrumbSchema(breadcrumbs)} />
       {service.faqs.length > 0 && (
         <StructuredData data={createFaqSchema(service.faqs)} />
@@ -113,6 +113,7 @@ export default async function ServiceDetailPage({
 
         <h1 className="mt-5 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">
           {service.name}
+          {" "}
           <span className="block text-lg font-normal text-ink/40 sm:text-xl">
             {locale === "ru" ? "в Sunny Isles Beach, Miami" : "in Sunny Isles Beach, Miami"}
           </span>

@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { cookies } from "next/headers";
 import "@/app/globals.css";
-import { businessInfo } from "@/content/business";
+import { businessInfo, seoAssets } from "@/content/business";
 import { Locale, isLocale, localeToLang } from "@/lib/i18n/config";
 
 const inter = Inter({
@@ -17,10 +17,20 @@ const playfair = Playfair_Display({
   display: "swap"
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#FAF8F5" },
+    { media: "(prefers-color-scheme: dark)", color: "#1A1A1A" }
+  ]
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL(businessInfo.domain),
   title: {
     default: `${businessInfo.name} | Aesthetic Studio in Sunny Isles Beach, Miami`,
+    // Fallback only — page metadata uses absolute titles to avoid double brand
     template: `%s | ${businessInfo.name}`
   },
   description:
@@ -43,21 +53,38 @@ export const metadata: Metadata = {
     "facial near Aventura"
   ],
   applicationName: businessInfo.name,
+  authors: [{ name: businessInfo.owner, url: `${businessInfo.domain}/en/about` }],
+  creator: businessInfo.name,
+  publisher: businessInfo.name,
+  formatDetection: {
+    telephone: true,
+    email: true,
+    address: true
+  },
   openGraph: {
     type: "website",
     siteName: businessInfo.name,
     url: businessInfo.domain,
+    title: `${businessInfo.name} | Aesthetic Studio in Sunny Isles Beach, Miami`,
+    description:
+      "Laser hair removal, Hydrafacial, microneedling, chemical peels, and body contouring in Sunny Isles Beach, Miami. English & Russian.",
+    locale: "en_US",
+    alternateLocale: ["ru_RU"],
     images: [
       {
-        url: "/images/og-default.jpg",
+        url: seoAssets.ogImage,
         width: 1200,
-        height: 630
+        height: 630,
+        alt: "Laser & More — Aesthetic studio in Sunny Isles Beach, Miami"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/images/og-default.jpg"]
+    title: `${businessInfo.name} | Aesthetic Studio in Sunny Isles Beach, Miami`,
+    description:
+      "Laser hair removal, facials, and aesthetic treatments in Sunny Isles Beach, Miami.",
+    images: [seoAssets.ogImage]
   },
   verification: {
     google: "xfHufKmLtA6x0UTKGjhg7_bKujXPLKeoaJXs1Vm7J_c"
@@ -74,10 +101,22 @@ export const metadata: Metadata = {
     }
   },
   icons: {
-    icon: "/images/favicon.ico",
-    apple: "/images/apple-touch-icon.png"
+    icon: [
+      { url: seoAssets.favicon, sizes: "any" },
+      { url: seoAssets.icon192, sizes: "192x192", type: "image/png" },
+      { url: seoAssets.icon512, sizes: "512x512", type: "image/png" }
+    ],
+    apple: [{ url: seoAssets.appleTouchIcon, sizes: "180x180" }],
+    shortcut: seoAssets.favicon
   },
-  manifest: "/manifest.webmanifest"
+  manifest: "/manifest.webmanifest",
+  category: "beauty",
+  other: {
+    "geo.region": "US-FL",
+    "geo.placename": "Sunny Isles Beach",
+    "geo.position": `${businessInfo.coordinates.latitude};${businessInfo.coordinates.longitude}`,
+    ICBM: `${businessInfo.coordinates.latitude}, ${businessInfo.coordinates.longitude}`
+  }
 };
 
 export default async function RootLayout({

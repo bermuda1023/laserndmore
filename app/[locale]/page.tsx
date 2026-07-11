@@ -8,7 +8,12 @@ import { businessInfo, formatTime } from "@/content/business";
 import { isLocale, Locale } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/getDictionary";
 import { buildLocalizedMetadata } from "@/lib/seo/metadata";
-import { createLocalBusinessSchema, createFaqSchema } from "@/lib/seo/schema";
+import {
+  createLocalBusinessSchema,
+  createFaqSchema,
+  createWebSiteSchema,
+  createOrganizationSchema
+} from "@/lib/seo/schema";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -73,6 +78,8 @@ export default async function LocaleHomePage({
 
   return (
     <div>
+      <StructuredData data={createWebSiteSchema()} />
+      <StructuredData data={createOrganizationSchema()} />
       <StructuredData data={createLocalBusinessSchema()} />
       <StructuredData data={createFaqSchema(faqs)} />
       <div className="space-y-16">

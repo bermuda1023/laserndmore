@@ -5,7 +5,11 @@ import { getServices } from "@/content/services";
 import { businessInfo } from "@/content/business";
 import { isLocale, Locale } from "@/lib/i18n/config";
 import { buildLocalizedMetadata } from "@/lib/seo/metadata";
-import { createBreadcrumbSchema, createLocalBusinessSchema } from "@/lib/seo/schema";
+import {
+  createBreadcrumbSchema,
+  createLocalBusinessSchema,
+  createServiceItemListSchema
+} from "@/lib/seo/schema";
 import { notFound } from "next/navigation";
 
 const categoryLabelsEn: Record<string, string> = {
@@ -89,6 +93,7 @@ export default async function ServicesPage({
   return (
     <div>
       <StructuredData data={createLocalBusinessSchema()} />
+      <StructuredData data={createServiceItemListSchema(services, locale)} />
       <StructuredData data={createBreadcrumbSchema(breadcrumbs)} />
       <nav className="mb-3 flex items-center gap-2 text-xs text-ink/40">
         {breadcrumbs.map((crumb, i) => (

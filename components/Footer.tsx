@@ -16,7 +16,7 @@ export function Footer({ dict, locale }: FooterProps) {
         <div className="sm:col-span-2 lg:col-span-1">
           <Image
             src="/images/logo.png"
-            alt="Laser & More"
+            alt="Laser & More — Aesthetic studio in Sunny Isles Beach, Miami"
             width={150}
             height={42}
             className="h-9 w-auto mix-blend-multiply"
@@ -33,6 +33,7 @@ export function Footer({ dict, locale }: FooterProps) {
           <nav className="mt-4 flex flex-col gap-2.5">
             <Link href={`/${locale}/services`} className="text-sm text-ink/60 transition-colors hover:text-rose">{dict.nav.services}</Link>
             <Link href={`/${locale}/about`} className="text-sm text-ink/60 transition-colors hover:text-rose">{dict.nav.about}</Link>
+            <Link href={`/${locale}/blog`} className="text-sm text-ink/60 transition-colors hover:text-rose">{dict.nav.blog}</Link>
             <Link href={`/${locale}/gift-cards`} className="text-sm text-ink/60 transition-colors hover:text-rose">{dict.nav.giftCards}</Link>
             <Link href={`/${locale}/contact`} className="text-sm text-ink/60 transition-colors hover:text-rose">{dict.nav.contact}</Link>
           </nav>
@@ -42,11 +43,28 @@ export function Footer({ dict, locale }: FooterProps) {
           <h3 className="text-xs font-bold uppercase tracking-widest text-ink/30">
             {locale === "ru" ? "Локация" : "Location"}
           </h3>
-          <p className="mt-4 text-sm leading-relaxed text-ink/60">
-            {businessInfo.address.street}<br />
-            {businessInfo.address.city}, {businessInfo.address.region} {businessInfo.address.postalCode}
+          <address className="mt-4 text-sm not-italic leading-relaxed text-ink/60">
+            {businessInfo.address.street}
+            <br />
+            {businessInfo.address.city}, {businessInfo.address.region}{" "}
+            {businessInfo.address.postalCode}
+          </address>
+          <p className="mt-2 text-sm text-ink/60">
+            <a
+              href={`tel:${businessInfo.phoneE164}`}
+              className="transition-colors hover:text-rose"
+            >
+              {businessInfo.phone}
+            </a>
           </p>
-          <p className="mt-2 text-sm text-ink/60">{businessInfo.phone}</p>
+          <p className="mt-1 text-sm text-ink/60">
+            <a
+              href={`mailto:${businessInfo.email}`}
+              className="transition-colors hover:text-rose"
+            >
+              {businessInfo.email}
+            </a>
+          </p>
         </div>
 
         <div>

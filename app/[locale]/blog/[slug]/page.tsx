@@ -34,7 +34,11 @@ export async function generateMetadata({
     path: `/blog/${slug}`,
     title: post.title,
     description: post.excerpt,
-    keywords: post.tags
+    keywords: post.tags,
+    type: "article",
+    publishedTime: post.publishedAt,
+    modifiedTime: post.publishedAt,
+    authors: [businessInfo.owner]
   });
 }
 

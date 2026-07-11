@@ -56,7 +56,7 @@ export default async function AboutPage({
   return (
     <div>
       <StructuredData data={createLocalBusinessSchema()} />
-      <StructuredData data={createPersonSchema()} />
+      <StructuredData data={createPersonSchema(locale)} />
       <StructuredData data={createBreadcrumbSchema(breadcrumbs)} />
       <nav className="mb-3 flex items-center gap-2 text-xs text-ink/40">
         {breadcrumbs.map((crumb, i) => (
@@ -80,8 +80,9 @@ export default async function AboutPage({
           </p>
           <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl">
             {locale === "ru" ? "Анжелика" : "Anzhelika"}
+            {" "}
             <span className="block text-lg font-normal text-ink/40 sm:text-xl">
-              {locale === "ru" ? "Laser & More, Sunny Isles Beach, Miami" : "Laser & More, Sunny Isles Beach, Miami"}
+              Laser & More, Sunny Isles Beach, Miami
             </span>
           </h1>
 

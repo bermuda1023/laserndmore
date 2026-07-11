@@ -4,7 +4,7 @@ import { StructuredData } from "@/components/seo/StructuredData";
 import { getBlogPosts } from "@/content/blog";
 import { isLocale, Locale } from "@/lib/i18n/config";
 import { buildLocalizedMetadata } from "@/lib/seo/metadata";
-import { createBreadcrumbSchema } from "@/lib/seo/schema";
+import { createBreadcrumbSchema, createBlogListSchema } from "@/lib/seo/schema";
 import { notFound } from "next/navigation";
 
 const categoryLabelsEn: Record<string, string> = {
@@ -44,8 +44,8 @@ export async function generateMetadata({
     path: "/blog",
     title:
       localeParam === "ru"
-        ? "Блог — советы по уходу за кожей | Laser & More"
-        : "Skincare Blog — Tips & Guides | Laser & More",
+        ? "Блог — советы по уходу за кожей"
+        : "Skincare Blog — Tips & Guides",
     description:
       localeParam === "ru"
         ? "Экспертные советы по уходу за кожей, лазерным процедурам, анти-эйджингу и многому другому от Laser & More в Sunny Isles Beach."
@@ -79,6 +79,7 @@ export default async function BlogPage({
   return (
     <div>
       <StructuredData data={createBreadcrumbSchema(breadcrumbs)} />
+      <StructuredData data={createBlogListSchema(posts, locale)} />
       <nav className="mb-3 flex items-center gap-2 text-xs text-ink/40">
         {breadcrumbs.map((crumb, i) => (
           <span key={crumb.url} className="flex items-center gap-2">

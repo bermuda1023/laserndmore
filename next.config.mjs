@@ -8,8 +8,11 @@ const __dirname = path.dirname(__filename);
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  compress: true,
   images: {
-    formats: ["image/avif", "image/webp"]
+    formats: ["image/avif", "image/webp"],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384]
   },
   async headers() {
     return [
@@ -25,8 +28,45 @@ const nextConfig = {
           {
             key: "Strict-Transport-Security",
             value: "max-age=63072000; includeSubDomains; preload"
+          },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()"
           }
         ]
+      },
+      {
+        source: "/images/(.*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable"
+          }
+        ]
+      },
+      {
+        source: "/(.*)\\.(ico|png|jpg|jpeg|svg|webp|avif|woff2)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable"
+          }
+        ]
+      }
+    ];
+  },
+  async redirects() {
+    return [
+      // Legacy / bare paths that might be linked externally
+      {
+        source: "/home",
+        destination: "/en",
+        permanent: true
+      },
+      {
+        source: "/index",
+        destination: "/en",
+        permanent: true
       }
     ];
   },

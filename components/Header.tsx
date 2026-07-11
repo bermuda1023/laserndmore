@@ -27,7 +27,7 @@ export function Header({ locale, dict }: HeaderProps) {
         <Link href={`/${locale}`} className="flex items-center">
           <Image
             src="/images/logo.png"
-            alt="Laser & More"
+            alt="Laser & More — Aesthetic studio in Sunny Isles Beach, Miami"
             width={200}
             height={55}
             className="-my-2 h-12 w-auto mix-blend-multiply lg:h-14"

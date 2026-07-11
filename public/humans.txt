@@ -1,0 +1,10 @@
+/* TEAM */
+Founder: Anzhelika
+Studio: Laser & More
+Location: Sunny Isles Beach, Miami, Florida
+
+/* SITE */
+Standards: HTML5, JSON-LD, hreflang
+Languages: English, Russian
+Doctype: HTML5
+Components: Next.js

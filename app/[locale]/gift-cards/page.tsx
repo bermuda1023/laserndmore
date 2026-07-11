@@ -19,8 +19,8 @@ export async function generateMetadata({
     path: "/gift-cards",
     title:
       localeParam === "ru"
-        ? "Подарочные карты — Laser & More, Sunny Isles Beach"
-        : "Gift Cards — Laser & More, Sunny Isles Beach",
+        ? "Подарочные карты — Sunny Isles Beach, Miami"
+        : "Gift Cards — Sunny Isles Beach, Miami",
     description:
       localeParam === "ru"
         ? "Подарите процедуры Laser & More — подарочные карты на лазерную эпиляцию, уходы за лицом и мед-эстетику в Sunny Isles Beach, Miami."

@@ -62,7 +62,7 @@ export function Hero({ dict, locale }: HeroProps) {
           <div className="relative h-[420px] w-[300px] overflow-hidden rounded-3xl border border-warm-200/40 shadow-soft">
             <Image
               src="/images/owner-closeup.png"
-              alt="Anzhelika — Laser & More"
+              alt="Anzhelika, founder of Laser & More aesthetic studio in Sunny Isles Beach, Miami"
               fill
               className="object-cover object-top"
               priority

@@ -83,15 +83,19 @@ export default async function ContactPage({
       <div className="grid gap-6 lg:grid-cols-2">
         <div className="rounded-4xl border border-warm-200 bg-white p-8 shadow-soft sm:p-10">
           <div className="space-y-6">
-            <div>
+            <div itemScope itemType="https://schema.org/PostalAddress">
               <p className="text-xs font-bold uppercase tracking-widest text-ink/30">
                 {locale === "ru" ? "Адрес" : "Address"}
               </p>
-              <p className="mt-2 text-sm font-semibold text-ink">
+              <p className="mt-2 text-sm font-semibold text-ink" itemProp="streetAddress">
                 {businessInfo.address.street}
               </p>
               <p className="text-sm text-ink/60">
-                {businessInfo.address.city}, {businessInfo.address.region} {businessInfo.address.postalCode}
+                <span itemProp="addressLocality">{businessInfo.address.city}</span>
+                {", "}
+                <span itemProp="addressRegion">{businessInfo.address.region}</span>{" "}
+                <span itemProp="postalCode">{businessInfo.address.postalCode}</span>
+                <meta itemProp="addressCountry" content={businessInfo.address.country} />
               </p>
             </div>
 
@@ -99,8 +103,22 @@ export default async function ContactPage({
               <p className="text-xs font-bold uppercase tracking-widest text-ink/30">
                 {locale === "ru" ? "Связь" : "Get in Touch"}
               </p>
-              <p className="mt-2 text-sm text-ink/60">{businessInfo.phone}</p>
-              <p className="text-sm text-ink/60">{businessInfo.email}</p>
+              <p className="mt-2 text-sm text-ink/60">
+                <a
+                  href={`tel:${businessInfo.phoneE164}`}
+                  className="transition-colors hover:text-rose"
+                >
+                  {businessInfo.phone}
+                </a>
+              </p>
+              <p className="text-sm text-ink/60">
+                <a
+                  href={`mailto:${businessInfo.email}`}
+                  className="transition-colors hover:text-rose"
+                >
+                  {businessInfo.email}
+                </a>
+              </p>
             </div>
 
             <div>
