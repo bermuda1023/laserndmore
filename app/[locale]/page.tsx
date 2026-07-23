@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/sections/Hero";
 import { ServiceGrid } from "@/components/sections/ServiceGrid";
 import { TrustSignals } from "@/components/sections/TrustSignals";
+import { Reviews } from "@/components/sections/Reviews";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { getServices } from "@/content/services";
 import { businessInfo, formatTime } from "@/content/business";
@@ -101,6 +102,8 @@ export default async function LocaleHomePage({
       />
 
       <TrustSignals dict={dict} />
+
+      <Reviews dict={dict} locale={locale} />
 
       {/* Hours */}
       <section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

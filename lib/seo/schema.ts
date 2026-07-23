@@ -1,4 +1,5 @@
 import { businessInfo, businessSameAs, seoAssets } from "@/content/business";
+import { googleReviews, reviewSummary } from "@/content/reviews";
 import { ServiceItem } from "@/content/services.types";
 import { BlogPost } from "@/content/blog.types";
 import { Locale, localeToLang } from "@/lib/i18n/config";
@@ -82,11 +83,34 @@ export function createLocalBusinessSchema() {
     hasMap: businessInfo.googleUrl,
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingValue: "5.0",
-      reviewCount: "97",
-      bestRating: "5",
-      worstRating: "1"
+      ratingValue: reviewSummary.ratingValue.toFixed(1),
+      reviewCount: String(reviewSummary.reviewCount),
+      bestRating: String(reviewSummary.bestRating),
+      worstRating: String(reviewSummary.worstRating)
     },
+    ...(googleReviews.length
+      ? {
+          review: googleReviews.map((entry) => ({
+            "@type": "Review",
+            reviewRating: {
+              "@type": "Rating",
+              ratingValue: String(entry.rating),
+              bestRating: String(reviewSummary.bestRating),
+              worstRating: String(reviewSummary.worstRating)
+            },
+            author: {
+              "@type": "Person",
+              name: entry.author
+            },
+            datePublished: entry.date,
+            reviewBody: entry.text.en,
+            publisher: {
+              "@type": "Organization",
+              name: "Google"
+            }
+          }))
+        }
+      : {}),
     availableLanguage: businessInfo.languages,
     contactPoint: [
       {

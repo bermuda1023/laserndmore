@@ -27,6 +27,13 @@ const ru = {
       "Онлайн-запись и подарочные карты"
     ]
   },
+  reviews: {
+    title: "Что говорят клиенты о Laser & More",
+    subtitle: "Рейтинг 5.0 на основе отзывов в Google от клиентов в Sunny Isles Beach, Miami, Aventura и близлежащих районах.",
+    basedOn: "На основе {count} отзывов в Google",
+    readAll: "Читать отзывы в Google",
+    leaveReview: "Оставить отзыв"
+  },
   contact: {
     title: "Посетите Laser & More в Sunny Isles Beach",
     subtitle: "Нужна помощь с выбором процедуры? Свяжитесь с нами или запишитесь онлайн — обслуживаем Sunny Isles, Miami, Aventura и близлежащие районы."

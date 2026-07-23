@@ -27,6 +27,13 @@ const en = {
       "Online direct booking and gift cards available"
     ]
   },
+  reviews: {
+    title: "What clients say about Laser & More",
+    subtitle: "Rated 5.0 across Google reviews from clients in Sunny Isles Beach, Miami, Aventura, and beyond.",
+    basedOn: "Based on {count} Google reviews",
+    readAll: "Read reviews on Google",
+    leaveReview: "Leave a review"
+  },
   contact: {
     title: "Visit Laser & More in Sunny Isles Beach",
     subtitle: "Questions about which treatment is right for you? Reach out or book online — we serve Sunny Isles, Miami, Aventura, and beyond."
