@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { businessInfo } from "@/content/business";
+import { businessInfo, contentLastUpdated } from "@/content/business";
 import { locales, localeToLang } from "@/lib/i18n/config";
 import { servicesEn } from "@/content/services.en";
 import { servicesRu } from "@/content/services.ru";
@@ -55,7 +55,9 @@ function serviceLanguageAlternates(
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+  // Stable, real revision date — not `new Date()`, which would claim every
+  // URL changed on every crawl and get lastmod discounted.
+  const now = new Date(contentLastUpdated);
 
   const staticUrls: MetadataRoute.Sitemap = basePaths.map((path) =>
     entry(path, {
@@ -94,25 +96,37 @@ export default function sitemap(): MetadataRoute.Sitemap {
   });
 
   // Also list RU service URLs as crawlable entries (Google supports both patterns)
-  const ruServiceUrls: MetadataRoute.Sitemap = servicesRu.map((service) => ({
-    url: `${businessInfo.domain}/ru/services/${service.slug}`,
-    lastModified: now,
-    changeFrequency: "weekly" as const,
-    priority: 0.7
-  }));
+  const ruServiceUrls: MetadataRoute.Sitemap = servicesRu.map((service, index) => {
+    const enSlug = servicesEn[index]?.slug;
+    return {
+      url: `${businessInfo.domain}/ru/services/${service.slug}`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+      ...(enSlug
+        ? {
+            alternates: {
+              languages: serviceLanguageAlternates(enSlug, service.slug)
+            }
+          }
+        : {})
+    };
+  });
 
   const ruBlogUrls: MetadataRoute.Sitemap = blogPostsRu.map((post) => ({
     url: `${businessInfo.domain}/ru/blog/${post.slug}`,
     lastModified: new Date(post.publishedAt),
     changeFrequency: "monthly" as const,
-    priority: 0.6
+    priority: 0.6,
+    alternates: { languages: languageAlternates(`/blog/${post.slug}`) }
   }));
 
   const ruStatic: MetadataRoute.Sitemap = basePaths.map((path) => ({
     url: `${businessInfo.domain}/ru${path}`,
     lastModified: now,
     changeFrequency: "weekly" as const,
-    priority: path === "" ? 0.95 : 0.75
+    priority: path === "" ? 0.95 : 0.75,
+    alternates: { languages: languageAlternates(path) }
   }));
 
   return [

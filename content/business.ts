@@ -46,6 +46,14 @@ export const businessSameAs = [
   businessInfo.googleUrl
 ] as const;
 
+/**
+ * Date the site's evergreen content (services, pages) was last revised.
+ * Feeds <lastmod> in the sitemap — bump it when you actually change content.
+ * Using a real, stable date keeps the freshness signal trustworthy; a moving
+ * "now" timestamp makes crawlers discount lastmod entirely.
+ */
+export const contentLastUpdated = "2026-07-25";
+
 /** Canonical paths for SEO images (served from /public) */
 export const seoAssets = {
   ogImage: "/images/og-default.jpg",

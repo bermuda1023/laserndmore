@@ -36,7 +36,10 @@ export function ServiceGrid({ services, locale, heading, subheading }: ServiceGr
         {services.map((service, i) => (
           <article
             key={service.slug}
-            className={`animate-fade-in-up stagger-${Math.min(i + 1, 5)} group relative rounded-2xl border border-warm-200 bg-white p-6 transition-all hover:border-warm-300 hover:shadow-card`}
+            // Inline delay: `stagger-*` built from a template literal is
+            // invisible to Tailwind's scanner, so stagger-5 never ships.
+            style={{ animationDelay: `${Math.min(i + 1, 6) * 0.1}s` }}
+            className="animate-fade-in-up group relative rounded-2xl border border-warm-200 bg-white p-6 transition-all hover:border-warm-300 hover:shadow-card"
           >
             <div className="flex items-start justify-between gap-3">
               <span className={`inline-flex rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest ${categoryColors[service.category] ?? "bg-warm-100 text-ink/50"}`}>

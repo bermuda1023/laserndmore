@@ -64,6 +64,7 @@ export function Hero({ dict, locale }: HeroProps) {
               src="/images/owner-closeup.png"
               alt="Anzhelika, founder of Laser & More aesthetic studio in Sunny Isles Beach, Miami"
               fill
+              sizes="300px"
               className="object-cover object-top"
               priority
             />

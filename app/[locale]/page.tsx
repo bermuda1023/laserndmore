@@ -81,7 +81,8 @@ export default async function LocaleHomePage({
     <div>
       <StructuredData data={createWebSiteSchema()} />
       <StructuredData data={createOrganizationSchema()} />
-      <StructuredData data={createLocalBusinessSchema()} />
+      {/* Reviews are rendered on this page, so the rating/review markup belongs here */}
+      <StructuredData data={createLocalBusinessSchema({ includeReviews: true })} />
       <StructuredData data={createFaqSchema(faqs)} />
       <div className="space-y-16">
       <Hero dict={dict} locale={locale} />
