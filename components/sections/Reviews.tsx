@@ -21,9 +21,23 @@ function GoogleGlyph({ className = "" }: { className?: string }) {
 }
 
 /** Row of five stars, filled up to `rating`. */
-function Stars({ rating, size = 18 }: { rating: number; size?: number }) {
+function Stars({
+  rating,
+  size = 18,
+  label
+}: {
+  rating: number;
+  size?: number;
+  /** Accessible text alternative; omit where nearby text already states the rating. */
+  label?: string;
+}) {
   return (
-    <span className="inline-flex" aria-hidden="true">
+    <span
+      className="inline-flex"
+      {...(label
+        ? { role: "img", "aria-label": label }
+        : { "aria-hidden": true as const })}
+    >
       {[0, 1, 2, 3, 4].map((i) => (
         <svg
           key={i}
@@ -100,23 +114,41 @@ export function Reviews({ dict, locale }: ReviewsProps) {
       {/* Featured review cards (rendered only when real reviews are provided) */}
       {googleReviews.length > 0 && (
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {googleReviews.map((review, i) => (
-            <figure
-              key={`${review.author}-${i}`}
-              className={`animate-fade-in-up stagger-${Math.min(i + 1, 5)} flex h-full flex-col rounded-2xl border border-warm-200 bg-white p-6`}
-            >
-              <div className="flex items-center justify-between">
-                <Stars rating={review.rating} size={16} />
-                <GoogleGlyph />
-              </div>
-              <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-ink/70">
-                &ldquo;{(locale === "ru" && review.text.ru) || review.text.en}&rdquo;
-              </blockquote>
-              <figcaption className="mt-5 border-t border-warm-100 pt-4 text-sm font-semibold text-ink">
-                {review.author}
-              </figcaption>
-            </figure>
-          ))}
+          {googleReviews.map((review, i) => {
+            const isTranslated = locale === "ru" && Boolean(review.text.ru);
+            return (
+              <figure
+                key={`${review.author}-${i}`}
+                // Delay is inline rather than a `stagger-*` class: those are
+                // built from a template literal, so Tailwind can't see them.
+                style={{ animationDelay: `${Math.min(i + 1, 6) * 0.1}s` }}
+                className="animate-fade-in-up flex h-full flex-col rounded-2xl border border-warm-200 bg-white p-6"
+              >
+                <div className="flex items-center justify-between">
+                  <Stars
+                    rating={review.rating}
+                    size={16}
+                    label={dict.reviews.starsLabel.replace(
+                      "{rating}",
+                      String(review.rating)
+                    )}
+                  />
+                  <GoogleGlyph />
+                </div>
+                <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-ink/70">
+                  &ldquo;{isTranslated ? review.text.ru : review.text.en}&rdquo;
+                </blockquote>
+                <figcaption className="mt-5 border-t border-warm-100 pt-4 text-sm font-semibold text-ink">
+                  {review.author}
+                  {isTranslated && (
+                    <span className="ml-2 font-normal text-xs text-ink/40">
+                      {dict.reviews.translated}
+                    </span>
+                  )}
+                </figcaption>
+              </figure>
+            );
+          })}
         </div>
       )}
     </section>

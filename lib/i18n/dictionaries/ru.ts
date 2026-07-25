@@ -32,7 +32,9 @@ const ru = {
     subtitle: "Рейтинг 5.0 на основе отзывов в Google от клиентов в Sunny Isles Beach, Miami, Aventura и близлежащих районах.",
     basedOn: "На основе {count} отзывов в Google",
     readAll: "Читать отзывы в Google",
-    leaveReview: "Оставить отзыв"
+    leaveReview: "Оставить отзыв",
+    translated: "Перевод",
+    starsLabel: "Оценка {rating} из 5 звёзд"
   },
   contact: {
     title: "Посетите Laser & More в Sunny Isles Beach",

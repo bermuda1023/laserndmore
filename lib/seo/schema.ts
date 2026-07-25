@@ -46,7 +46,16 @@ function parsePrice(priceFrom: string): string | undefined {
   return match || undefined;
 }
 
-export function createLocalBusinessSchema() {
+/**
+ * LocalBusiness node.
+ *
+ * `includeReviews` must only be set on a page that actually renders the rating
+ * and review cards. Search engines require marked-up content to be visible on
+ * the page it is emitted from, so this stays off everywhere else.
+ */
+export function createLocalBusinessSchema(
+  { includeReviews = false }: { includeReviews?: boolean } = {}
+) {
   return {
     "@context": "https://schema.org",
     "@type": ["BeautySalon", "LocalBusiness", "HealthAndBeautyBusiness"],
@@ -81,34 +90,40 @@ export function createLocalBusinessSchema() {
     areaServed,
     sameAs: [...businessSameAs],
     hasMap: businessInfo.googleUrl,
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: reviewSummary.ratingValue.toFixed(1),
-      reviewCount: String(reviewSummary.reviewCount),
-      bestRating: String(reviewSummary.bestRating),
-      worstRating: String(reviewSummary.worstRating)
-    },
-    ...(googleReviews.length
+    ...(includeReviews
       ? {
-          review: googleReviews.map((entry) => ({
-            "@type": "Review",
-            reviewRating: {
-              "@type": "Rating",
-              ratingValue: String(entry.rating),
-              bestRating: String(reviewSummary.bestRating),
-              worstRating: String(reviewSummary.worstRating)
-            },
-            author: {
-              "@type": "Person",
-              name: entry.author
-            },
-            datePublished: entry.date,
-            reviewBody: entry.text.en,
-            publisher: {
-              "@type": "Organization",
-              name: "Google"
-            }
-          }))
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: reviewSummary.ratingValue.toFixed(1),
+            reviewCount: String(reviewSummary.reviewCount),
+            bestRating: String(reviewSummary.bestRating),
+            worstRating: String(reviewSummary.worstRating)
+          },
+          ...(googleReviews.length
+            ? {
+                review: googleReviews.map((entry) => ({
+                  "@type": "Review",
+                  reviewRating: {
+                    "@type": "Rating",
+                    ratingValue: String(entry.rating),
+                    bestRating: String(reviewSummary.bestRating),
+                    worstRating: String(reviewSummary.worstRating)
+                  },
+                  author: {
+                    "@type": "Person",
+                    name: entry.author
+                  },
+                  // datePublished is intentionally omitted unless a verified
+                  // date is available — never guess it.
+                  ...(entry.date ? { datePublished: entry.date } : {}),
+                  reviewBody: entry.text.en,
+                  publisher: {
+                    "@type": "Organization",
+                    name: "Google"
+                  }
+                }))
+              }
+            : {})
         }
       : {}),
     availableLanguage: businessInfo.languages,

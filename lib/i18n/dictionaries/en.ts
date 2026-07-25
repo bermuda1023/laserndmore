@@ -32,7 +32,9 @@ const en = {
     subtitle: "Rated 5.0 across Google reviews from clients in Sunny Isles Beach, Miami, Aventura, and beyond.",
     basedOn: "Based on {count} Google reviews",
     readAll: "Read reviews on Google",
-    leaveReview: "Leave a review"
+    leaveReview: "Leave a review",
+    translated: "Translated",
+    starsLabel: "Rated {rating} out of 5 stars"
   },
   contact: {
     title: "Visit Laser & More in Sunny Isles Beach",
